@@ -1,6 +1,7 @@
 package practice2;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 public class Product {
     private BigDecimal price;
@@ -23,5 +24,16 @@ public class Product {
 
     public long getCode() {
         return code;
+    }
+
+    public OrderItem findOrderItem(List<OrderItem> items) {
+        OrderItem curItem = null;
+        for (OrderItem item : items) {
+            if (item.getCode() == getCode()) {
+                curItem = item;
+                break;
+            }
+        }
+        return curItem;
     }
 }

@@ -10,7 +10,7 @@ public class Security {
         this.securityChecker = checker;
     }
 
-    public boolean hasAccess(User user, Permission permission, ImmutableList<Permission> permissions) {
+   /* public boolean hasAccess(User user, Permission permission, ImmutableList<Permission> permissions) {
 
         boolean isAccess = false;
         if (user == null) {
@@ -29,10 +29,23 @@ public class Security {
             isAccess = true;
         }
 
+
+
         if (this.securityChecker.checkPermission(user, permission) || permissions.contains(permission)) {
             isAccess = true;
         }
 
+
         return isAccess;
+    }*/
+
+    public boolean hasAccess(User user, Permission permission, ImmutableList<Permission> permissions) {
+
+        if (user == null) return false;
+        if (permission == null) return false;
+        if (permissions.size() == 0) return false;
+        if (securityChecker.isAdmin()) return true;
+        if (!this.securityChecker.checkPermission(user, permission) && !permissions.contains(permission)) return false;
+        return true;
     }
 }
